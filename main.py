@@ -24,7 +24,10 @@ def sweep(direction):
 
 while speed < SPEED_LIMIT:
     speed,direction=CalculateSpeed.testSpeed()
-    print speed
+    if speed > SPEED_LIMIT:
+        print "Speeding car detected at: " + str(speed) + "cm per second."
+    else:
+        print "Car detected at: " + str(speed) + "cm per second."
     
     
 sweep(direction)

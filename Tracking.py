@@ -5,14 +5,10 @@ import getObjectColor
 def track () :
 
     # set-up initial colour
-    clrL=[]
-    clrH=[]
-    clrL[0] = 340     #pre-set constants: RED
-    clrH[0] = 5
-    clrL[1] = 270     #pre-set constants: PURPLE
-    clrH[1] = 315    
-    clrL[2] = 175     #pre-set constants: BLUE
-    clrH[2] = 260    
+    clrL=[340,60,175]
+    clrH=[5,150,250]
+    
+    pixelCount = [0,0,0]
     
     colour = -1 #colour
     
@@ -23,21 +19,31 @@ def track () :
 	sensitivity = 35;            
         
         
-	if c < 0:
+	if colour < 0:     #target colour is not yet determined
 	    
-	    pxs = 0
+	    for colour in xrange(3):
+		p = takePicture()
+		p = getObjectColor.compressImage(p,4)		    
+
+		temp = copyPicture(p)
+		pixelCount[colour],avg_x,avg_y=getObjectColor.getObjectColor(temp, clrL[colour], clrH[colour])
 	    
-	    while pxs < 100:
-		
-		for colour in xrange(2):
+	    #calculate the most dominant colour
+	    max = 0
+	    for index in xrange(3):
+		if (pixelCount[index] > max):
+		    max = pixelCount[index]
+		    colour = index
 		    
-		    p = takePicture()
-		    p = getObjectColor.compressImage(p,4)
-		    pxs,avg_x,avg_y=getObjectColor.getObjectColor(p, clrL[colour], clrH[colour])
+	    pxs=pixelCount[colour]
 		    
-		    if pxs > 100:
-			break
-		    show(p)
+	    if colour == 0:
+		print "car colour: red"
+	    elif colour == 1:
+		print "car colour: green"
+	    elif colour == 2:
+		print "car colour: blue"	    
+	    
 	else:
 	    
 	    p = takePicture()
@@ -49,19 +55,21 @@ def track () :
 	    
 	#see if the robot is going to hit something
 	obstacleStatus = getObstacle()
-	if obstacleStatus[1] > 1000:    #middle sensor is most important
+	if obstacleStatus[1] > 1100:    #middle sensor is most important
 	    stop()
 	    return
         
         if pxs < 5:
 	    stop()
-        elif avg_x < (127-sensitivity)/4:
-	    motors(0.6,1)
-	    time.sleep(0.005)
-        elif avg_x > (127+sensitivity)/4:
-	    motors(1,0.6)
-	    time.sleep(0.005)
+        elif avg_x < (127-sensitivity)/4 and avg_x > (55)/4 :
+	    motors(0.8,1)
+        elif avg_x > (127+sensitivity)/4 and avg_x < (195)/4:
+	    motors(1,0.8)
+	elif avg_x < (55)/4:
+	    motors(0.65,1)
+	elif avg_x > (195)/4:
+	    motors(1,0.65)	    
 	else:
 	    motors(1,1)
-	    time.sleep(0.005)
+
 	

@@ -28,7 +28,7 @@ def getObjectColor(picture,clrL,clrH):
             HSV = colorsys.rgb_to_hsv(RGB[0],RGB[1],RGB[2])
             if (clrL > clrH): #RED
                 if (HSV[0] >= clrL/360.0 or HSV[0] <= clrH/360.0) and HSV[1] >= 0.5 and HSV[2] >= 0.5:
-                    setColor(pixel,white)
+                    #setColor(pixel,white)
                     avg_x=(avg_x+x)/2
                     avg_y=(avg_y+y)/2
                     pxs+=1
@@ -36,7 +36,7 @@ def getObjectColor(picture,clrL,clrH):
                     setColor(pixel,black)
             else:
                 if (HSV[0] >= clrL/360.0 and HSV[0] <= clrH/360.0) and HSV[1] >= 0.5 and HSV[2] >= 0.5:
-                    setColor(pixel,white)
+                    #setColor(pixel,white)
                     avg_x=(avg_x+x)/2
                     avg_y=(avg_y+y)/2
                     pxs+=1
