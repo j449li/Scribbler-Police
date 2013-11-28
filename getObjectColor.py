@@ -5,8 +5,8 @@
  
     Date: November 27, 2013
  
-    Description: This program calculates the escape velocity 
-    for a probe to escape the planet's gravitational pull.
+    Description: This module holds image-processing algorithms used by other
+    modules.
     
 """
 
