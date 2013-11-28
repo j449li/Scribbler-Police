@@ -1,3 +1,20 @@
+"""
+    Author: Difie Zhang
+    
+    Edited by: Mariam Al-Azizi, Daniel Joseph, Ye Li, Arash Mortazavi
+ 
+    Date: November 26, 2013
+ 
+    Description: This program calculates the speed of an object using
+    the two infared sensor at the back of the scribbler robot.
+    
+    The program measures the time the object took to get from one sensor
+    to the other. Then through numerous testing, and statistical analysis
+    a relationship between the measured time and approximate speed of the
+    object was developed.
+    
+"""
+
 from myro import *
 
 #enters a testSpeed mode and returns after it detects something going past
@@ -24,8 +41,8 @@ def testSpeed() :
                 endTime = currentTime()
                 break  
                             
-    detectedTime = endTime - startTime
-    detectedSpeed = 4.4075*((detectedTime)**(-0.79))   #speed in cm/s
+    detectedTime = endTime - startTime                 #time for the object to go from one sensor to the other
+    detectedSpeed = 4.4075*((detectedTime)**(-0.79))   #speed in cm/s, constant values are obtained from experimentation and statistical anaylsis
     
     #print "detected speed: " + str(detectedSpeed) #for testing
 
@@ -36,4 +53,4 @@ def testSpeed() :
         if ir_sensor[0] == 1 and ir_sensor[1] == 1:
             seesSomething = False
     
-    return detectedSpeed, direction  #speed in cm/s
+    return detectedSpeed, direction  #returns the speed and heading of the object

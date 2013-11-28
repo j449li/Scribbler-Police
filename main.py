@@ -1,3 +1,18 @@
+"""
+    Author: Difie Zhang
+    
+    Edited by: Daniel Joseph, Mariam Al-Azizi, Arash Mortazavi
+ 
+    Date: November 27, 2013
+ 
+    Description: This is the main logic of the program.
+    
+    ->Stationary until a speeding object is detected
+    ->Executes a backward-turn maneuver once a speeding object is detected
+    ->Attempts to track the object
+    
+"""
+
 from myro import *
 initialize("COM3")
 

@@ -1,7 +1,24 @@
+"""
+    Author: Ernest Ho
+    
+    Edited by: Jiazhou Li, Ye Li, Difie Zhang, Arash Mortazavi
+ 
+    Date: November 27, 2013
+ 
+    Description: This program calculates the escape velocity 
+    for a probe to escape the planet's gravitational pull.
+    
+"""
+
 from myro import *
 import colorsys
 
 def compressImage(picture,ratio):
+    """
+    Compresses the image file by a certain factor to make the processing
+    of the image faster
+    """
+    
     pic = copyPicture(picture)
     picture = makePicture(getWidth(pic)/ratio,getHeight(pic)/ratio)
     for x in xrange(0,getWidth(pic),ratio):
@@ -11,6 +28,15 @@ def compressImage(picture,ratio):
     return picture
 
 def getObjectColor(picture,clrL,clrH):
+    """
+    Goes through the picture pixel by pixel, looking for pixels of the desired
+    hue, saturation and value.
+    
+    returns:
+              -average x-position and average y-position of the desired pixels.
+              -the number of desired pixels found
+    """
+    
     avg_x=0
     avg_y=0
     pxs=0
@@ -42,4 +68,5 @@ def getObjectColor(picture,clrL,clrH):
                     pxs+=1
                 else:
                     setColor(pixel,black)
+                    
     return pxs,avg_x,avg_y

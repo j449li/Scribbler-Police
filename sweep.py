@@ -1,8 +1,18 @@
+"""
+    Author: Difie Zhang
+    
+    Edited by: Daniel Joseph, Mariam Al-Azizi, Arash Mortazavi
+ 
+    Date: November 24, 2013
+ 
+    Description: This program executes a pre-determined maneuver for the robot 
+    once a speeding object has been detected.
+    
+"""
+
 from myro import *
 
 import time
-
-#initialize("COM3")
 
 def sweep(direction):
     INNER_MOTOR = 0.57   #constants, test-proven at Nov.24th
